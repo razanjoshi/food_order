@@ -3,8 +3,11 @@
 <% @products.each do |product| %>
 	<div class="well">
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-4">
 				<h3><%= product.title %></h3>
+			</div>
+			<div class="col-sm-4">
+				<%= image_tag(product.picture_url, width: 400) if product.picture.present? %>
 			</div>
 			<div class="col-sm-4">
 				<div class="pull-right">
