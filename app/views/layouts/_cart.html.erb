@@ -1,1 +1,5 @@
-<%= link_to "#{current_order.order_items.size} items in cart and price #{current_order.subtotal}", carts_path %>
+
+<%= link_to carts_path do %>
+  <i class="fa fa-shopping-cart"></i>
+  <span><%= "#{current_order.order_items.size} items in cart and price #{current_order.subtotal}" %></span>
+<% end %>

@@ -9,6 +9,11 @@
 		<%= f.number_field :price, value: 1, class: 'form-control', min: 1 %>
 	</div>
 
+	<div class="form-group">
+		<%= f.label :price, "Image" %>
+		<%= f.file_field :picture %>
+	</div>
+
 	<%= f.submit "Save", class: 'btn btn-success' %>
 <% end %>
   
