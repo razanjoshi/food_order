@@ -4,7 +4,6 @@ class CartsController < ApplicationController
 	end
 
 	def order_now
-		binding.pry
 		current_order.order_now
 	end
 end

@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
 	has_many :order_items
+	belongs_to :user, optional: true
 	before_save :set_subtotal
 
 	def subtotal
@@ -7,7 +8,6 @@ class Order < ApplicationRecord
 	end
 
 	def order_now
-		# binding.pry
 		# order.inprogress
 	end
 
