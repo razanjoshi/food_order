@@ -1,3 +1,4 @@
+<h2><span <i class="fa fa-shopping-cart"></i>My Cart</h2>
 <div class="cart_item">
 	<%= render "carts/cart_item" %>
 	<%= link_to 'Order Now', order_now_carts_path(current_order, order_items: @order_items), method: :post, class: 'btn btn-success' %>
