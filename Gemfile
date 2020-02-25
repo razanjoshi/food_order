@@ -60,6 +60,9 @@ gem 'sprockets', '3.6.3'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
+gem 'data-confirm-modal'
+gem 'jquery-rails'
+gem 'fancybox-rails'
 
 group :production do
   gem 'pg', '~> 0.20'

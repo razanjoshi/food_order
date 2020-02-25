@@ -32,6 +32,36 @@
 			</div>
 		</div>
 	<% end %>
+	<div style="float: right">
+		<h3>Subtotal: <span><%= current_order.subtotal %></span></h3>
+		<% if !current_user.guest? %>
+			<%= link_to 'Order Now', '#',  class: 'btn btn-success', id: 'chckout', style: "width: 100%" %>
+		<% else %>
+			<%= link_to 'Order Now', '#', "data-toggle": "modal", "data-target": "#exampleModalCenter",  class: 'btn btn-success', id: 'chckout', style: "width: 100%" %>
+		<% end %>
+	</div>
+	
 <% else %>
 	
 <% end %>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Continue as Guest?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Since you're not signed in, do you want to sign up or continue as guest?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Continue as Guest</button>
+        <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
