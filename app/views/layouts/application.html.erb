@@ -11,7 +11,7 @@
   <body>
 
     <div class="container">
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -30,7 +30,6 @@
             <ul class="nav navbar-nav navbar-right">
               <li>
                 <p class="navbar-text float-right">
-                  <%= puts "GUEST USER SESSION:  #{current_user.guest?}" %>
                   <% if user_signed_in? && !current_user.guest? %>
                     Logged in as <strong><%= current_user.email %></strong>.
                     <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
