@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     post :order_now
   end
   match 'order_now' => 'carts#order_now', :via => :post
-  root "home#index"
+  root "home#landing_page"
+  match '/menu' => 'home#index', via: :get
   match '/carts/checkout' => 'orders#new', via: :get
   match '/carts/checkout' => 'orders#create', via: :patch
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
