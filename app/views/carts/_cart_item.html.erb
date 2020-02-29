@@ -35,7 +35,7 @@
 	<div style="float: right">
 		<h3>Subtotal: <span><%= current_order.subtotal %></span></h3>
 		<% if !current_user.guest? %>
-			<%= link_to 'Order Now', '#',  class: 'btn btn-success', id: 'chckout', style: "width: 100%" %>
+			<%= link_to 'Order Now', carts_checkout_path,  class: 'btn btn-success', id: 'chckout', style: "width: 100%" %>
 		<% else %>
 			<%= link_to 'Order Now', '#', "data-toggle": "modal", "data-target": "#exampleModalCenter",  class: 'btn btn-success', id: 'chckout', style: "width: 100%" %>
 		<% end %>
@@ -59,7 +59,8 @@
         <p>Since you're not signed in, do you want to sign up or continue as guest?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Continue as Guest</button>
+        <%# <button type="button" class="btn btn-warning" data-dismiss="modal">Continue as Guest</button> %>
+				<%= link_to "Continue as Guest", carts_checkout_path, class: 'btn btn-warning' %>
         <%= link_to "Login", new_user_session_path, class: 'btn btn-primary' %>
       </div>
     </div>

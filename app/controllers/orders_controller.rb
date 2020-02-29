@@ -8,11 +8,10 @@ class OrdersController < ApplicationController
   end
 
   def create
-    binding.pry
-    if user_signed_in?
-      #something
-    end
     @order = current_order
+    unless user_signed_in? && current_user.guest?
+      order_params.merge(user_id: current_user.id)
+    end
 
     if @order.update_attributes(order_params.merge(status: 'open'))
       session[order_id] = nil  #makes cart items 0
@@ -26,7 +25,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit()
+    params.require(:order).permit(:status, :user_id, :total)
   end
 
 end
