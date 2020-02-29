@@ -83,4 +83,12 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.mailtrap.io",
+    :port                 => 587,
+    :user_name            => "bb0fffe2c1a8ed",
+    :password             => "a1a95796c98a57",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 end
