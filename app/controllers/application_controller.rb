@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-  private
-
   def guest_user
     User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
   end
