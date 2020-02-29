@@ -1,0 +1,13 @@
+<h2>Checkout</h2>
+
+<%= form_for @order, url: carts_checkout_path do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :tax %>
+
+    <%= f.label :phone %>
+    <%= f.text_field :total %>
+
+    <%= f.submit "Checkout" %>
+  </div>
+<% end %>
