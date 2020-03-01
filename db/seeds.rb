@@ -6,5 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Product.create(title: 'Chicken Biryaani', price: 5.5)
-Product.create(title: 'Chicken Pizza', price: 3.5)
+q = Product.create(title: 'Chicken Pizza', price: 3.5)
+q.picture = Pathname.new(Rails.root.join("public/images/PizzaHut.jpg")).open
+q.save
+
+p = Product.create(title: 'Chicken Biryaani', price: 5.5)
+p.picture = Pathname.new(Rails.root.join("public/images/biryani.jpg")).open
+p.save
