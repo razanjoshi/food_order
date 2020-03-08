@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   def index
+    check_isadmin?
     @orders = Order.all
   end
 
@@ -16,14 +17,15 @@ class OrdersController < ApplicationController
     if @order.update_attributes(
       order_params.merge(
         status: 'open',
-        card_token: params[:stripeToken]
+        stripe_email: params[:stripeEmail],
+        card_token: params[:stripeToken],
+        user_id: current_user.guest? ? nil : current_user.id
         )
       )
 
       process_payment(params[:stripeEmail], params[:stripeToken])
-
+      OrderMailer.new_order_mail(params[:stripeEmail], @order).deliver_now
       session[:order_id] = nil  #makes cart items 0
-      #do something for delivery here, as in change the delivery status to something else
 
       redirect_to root_path
       flash[:notice] = "Food order succesfully ordered."
@@ -32,7 +34,32 @@ class OrdersController < ApplicationController
     end
   end
 
+  def edit
+    @order = Order.find(params[:id])
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    if @order.update_attributes(order_params)
+      if order_params[:status] == 'delivered'
+        OrderMailer.order_delivered(@order.stripe_email, @order).deliver_now
+      end
+
+      redirect_to orders_path
+      flash[:notice] = 'Order successfully updated.'
+    else
+      render 'edit'
+      flash[:alert] = 'Could not update the order.'
+    end
+  end
+
   private
+
+  def check_isadmin?
+    return unless !current_user.is_admin
+    redirect_to root_path
+    flash[:alert] = "You are not authorized to access this page."
+  end
 
   def order_params
     params.require(:order).permit(:status, :user_id, :total, :stripeEmail, :stripeToken, :address, :phone)
