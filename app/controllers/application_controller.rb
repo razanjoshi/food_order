@@ -9,12 +9,11 @@ class ApplicationController < ActionController::Base
 
 
   def guest_user
-    User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
+    User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = continue_as_guest.id : session[:guest_user_id])
   end
 
-  def create_guest_user
-    user = User.new { |user| user.guest = true }
-    user.email = "guest_#{Time.now.to_i}#{rand(99)}@example.com"
+  def continue_as_guest
+    user = User.find_or_create_by(email: 'guest@cafe.com')
     user.save(:validate => false)
     user
   end

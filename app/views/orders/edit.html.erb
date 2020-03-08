@@ -1,0 +1,9 @@
+<%= form_for(@order) do |f| %>
+	<div class="form-group">
+		<%= f.label :status, "Status" %>
+    <div class="controls">
+		<%= f.select(:status, options_for_select([['OPEN', 'open'], ['GONE FOR DELIVERY', 'in-progress'], ['DELIVERED', 'delivered']], selected: @order.status), { include_blank: true }) %>
+	</div>
+
+	<%= f.submit "Save", class: 'btn btn-success' %>
+<% end %>

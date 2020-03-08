@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   
   def index
+    check_isadmin?
     @products = Product.all
   end
 
@@ -41,7 +42,14 @@ class ProductsController < ApplicationController
   end
 
   private
-    def product_params
-      params.require(:product).permit(:title, :price, :picture)
-    end
+
+  def check_isadmin?
+    return unless !current_user.is_admin
+    redirect_to root_path
+    flash[:alert] = "You are not authorized to access this page."
+  end
+  
+  def product_params
+    params.require(:product).permit(:title, :price, :picture)
+  end
 end
