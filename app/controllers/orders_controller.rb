@@ -42,6 +42,12 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.update_attributes(order_params)
       if order_params[:status] == 'delivered'
+        client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token)
+        client.messages.create(  
+          from: '+17727948289',       
+          to: '+447587293861',
+          body: 'Your order has been delivered. Thanks!!'
+        ) 
         OrderMailer.order_delivered(@order.stripe_email, @order).deliver_now
       end
 
